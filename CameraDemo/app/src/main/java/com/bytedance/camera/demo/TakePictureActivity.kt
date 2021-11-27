@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.media.ExifInterface
 import android.os.Bundle
@@ -67,8 +66,9 @@ class TakePictureActivity : AppCompatActivity() {
             val photoURI = FileProvider.getUriForFile(this,
                 "com.bytedance.camera.demo.fileprovider", photoFile
             )
-            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+            /**
+             *   补充完整缺失代码 A2
+             */
         }
     }
 
@@ -90,31 +90,9 @@ class TakePictureActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            // View的宽高
-            val targetW = mImageView!!.width
-            val targetH = mImageView!!.height
-
-            val bmOptions = BitmapFactory.Options()
-            bmOptions.inJustDecodeBounds = true
-            // 解析图片的宽高
-            BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions)
-            val photoW = bmOptions.outWidth
-            val photoH = bmOptions.outHeight
-            var inSampleSize = 1
-            if (photoH > targetH || photoW > targetH) {
-                val halfHeight = photoH / 2
-                val halfWidth = photoW / 2
-                // 计算合适的采样率
-                while (halfHeight / inSampleSize >= targetH && halfWidth / inSampleSize >= targetW) {
-                    inSampleSize *= 2
-                }
-            }
-            bmOptions.inJustDecodeBounds = false
-            bmOptions.inSampleSize = inSampleSize
-            bmOptions.inPurgeable = true
-            // 根据View的大小解码图片的大小
-            val bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions)
-            mImageView!!.setImageBitmap(bitmap) // 显示照片
+            /**
+             *   补充完整缺失代码 A1
+             */
         }
     }
 

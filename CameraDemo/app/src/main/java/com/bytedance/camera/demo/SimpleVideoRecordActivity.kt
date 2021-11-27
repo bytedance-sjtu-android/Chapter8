@@ -1,19 +1,13 @@
 package com.bytedance.camera.demo
 
-import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.Matrix
-import android.media.ExifInterface
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.widget.Button
 import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 
 class SimpleVideoRecordActivity : AppCompatActivity() {
     private var mRecordButton: Button? = null
@@ -24,23 +18,14 @@ class SimpleVideoRecordActivity : AppCompatActivity() {
         mRecordButton = findViewById(R.id.record)
         mVideoView = findViewById(R.id.video_view)
         mRecordButton?.setOnClickListener(View.OnClickListener {
-            if (ContextCompat.checkSelfPermission(
-                    this@SimpleVideoRecordActivity,
-                    Manifest.permission.CAMERA
-                )
-                != PackageManager.PERMISSION_GRANTED
-            ) {
-                ActivityCompat.requestPermissions(
-                    this@SimpleVideoRecordActivity,
-                    arrayOf(Manifest.permission.CAMERA),
-                    REQUEST_CAMERA_PERMISSION
-                )
-            } else {
+            /**
+             *   补充完整缺失代码 B1
+             */
 
                 val takeVideoIntent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
                 startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE)
 
-            }
+//            }
         })
     }
 
@@ -48,8 +33,9 @@ class SimpleVideoRecordActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
             val videoURI = data!!.data
-            mVideoView!!.setVideoURI(videoURI)
-            mVideoView!!.start()
+            /**
+             *   补充完整缺失代码 B2
+             */
         }
     }
 

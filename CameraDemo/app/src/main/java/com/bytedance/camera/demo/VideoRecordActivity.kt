@@ -15,7 +15,6 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import java.io.File
 import java.io.FileNotFoundException
-import java.io.FileOutputStream
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -50,8 +49,9 @@ class VideoRecordActivity : AppCompatActivity() {
         mSurfaceHolder?.addCallback(object : SurfaceHolder.Callback {
             override fun surfaceCreated(holder: SurfaceHolder) {
                 try {
-                    mCamera!!.setPreviewDisplay(holder)
-                    mCamera!!.startPreview()
+                    /**
+                     *   补充完整缺失代码 C1
+                     */
                 } catch (e: IOException) {
                     // error
                 }
@@ -94,9 +94,9 @@ class VideoRecordActivity : AppCompatActivity() {
         mCamera!!.takePicture(null, null, PictureCallback { bytes, camera ->
             val pictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE) ?: return@PictureCallback
             try {
-                val fos = FileOutputStream(pictureFile)
-                fos.write(bytes)
-                fos.close()
+                /**
+                 *   补充完整缺失代码 C2
+                 */
             } catch (e: FileNotFoundException) {
                 //error
             } catch (e: IOException) {
